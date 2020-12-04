@@ -1,6 +1,6 @@
-# Home Env Dashboard センサーノード
+# Home Env Dashboardセンサーノード
 
-家の環境をグラフ、ダッシュボードで見る「Home Env Dashboard」のセンサー情報を取得し記録をするスクリプトです。
+家の環境をグラフ、ダッシュボードで見る「homeenvdash」のセンサー情報を記録するスクリプトです。
 
 実行環境はRaspberry Pi 2以降を対象にしています。センサーは現在までBME280のみ対応しています。
 
@@ -8,19 +8,19 @@
 
 ## 必要なもの
 
-- Raspberry PI
+- Raspberry Pi
   - 検証済み: 3B, zero w
 - Raspberry Pi OS
   - 検証済み: 2020-08-20以降
 - BME280: 現在はSPI接続で利用します
   - [AE-BME280（秋月電子通商）](https://akizukidenshi.com/catalog/g/gK-09421/)
-- Raspberry Pi とセンサーをつなぐための部品
+- Raspberry Piとセンサーをつなぐための部品
   - ブレットボード
   - ジャンプワイヤー
 
 ## 利用したPythonパッケージ
 
-[Pipfile](./Pipfile)で確認出来ます。
+[Pipfile](./Pipfile)で確認できます。
 
 ## 使い方
 
@@ -34,11 +34,11 @@
 
 ### Raspberry Piセットアップとセンサー接続
 
-[Raspberry Pi OS](https://www.raspberrypi.org/software/)のセットアップを行います。現在だとRaspberry Pi imagerの利用が手軽です。
+[Raspberry Pi OS](https://www.raspberrypi.org/software/)のセットアップを行います。
 
 次にSPIの有効化を行います。`sudo raspi-config` より `Interfacing Options > SPI` へ進み`Enable`か確認してください。`Disable`なら`Enable`へ変更します。
 
-最後にraspberry piとセンサーを接続します。BME280とはSPIを使って通信を行うので、SPI通信向けの接続をしてください。
+最後にRaspberry Piとセンサーを接続します。BME280とはSPIを使って通信を行うので、SPI通信向けの接続をしてください。
 
 GPIO番号 | GPIOの種類 | AE-BME280 | 備考
 -- | -- | -- | --
@@ -51,7 +51,7 @@ GPIO番号 | GPIOの種類 | AE-BME280 | 備考
 
 ### Pythonで環境作成
 
-システムのPython環境を設定します。このプロジェクトではPython3を利用しているので、python3のインストールを行い、`python`コマンドをpython3で起動できるようにします.
+システムのPython環境を設定します。このプロジェクトではPython3を利用しているので、python3のインストールを行い、`python`コマンドをpython3で起動できるようにします。
 
 ```bash
 sudo update-alternatives --install /usr/bin/python python $(which python2) 1
