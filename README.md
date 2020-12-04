@@ -4,7 +4,7 @@
 
 実行環境はRaspberry Pi 2以降を対象にしています。センサーは現在までBME280のみ対応しています。
 
-ダッシュボードの構築はこちらを参考にしてください -> 
+ダッシュボードの構築はこちらを参考にしてください -> [hrsano645/homeenvdash](https://github.com/hrsano645/homeenvdash)
 
 ## 必要なもの
 
@@ -28,9 +28,36 @@
 
 - Googleサービスアカウントでの認証の準備をします
 - Google Sheet APIを有効化します
-- Googleドライブでスプレッドシートのファイルを作成、サービスアカウントのユーザー（専用のメールアドレス）を登録します
 
 サービスアカウントの鍵情報をこのプロジェクトのルートディレクトリに配置します。名称を`oauth_service_account_key.json`に変更するとわかりやすいです
+
+### センサー情報記録用のGoogleスプレッドシートを用意する
+
+センサーノードが情報を記録するためのGoogleスプレッドシートを用意します。ひな形となるスプレッドシートを開いて、メニューから`ファイル>コピーして作成`を実行します。
+
+[bme280_recode_template - Google スプレッドシート](https://docs.google.com/spreadsheets/d/12Y4pxrPcIyydN-zWOwN0vw33GRGuCl-GeleUJcsvqcg/)
+
+ファイル名は適当に変更してください。作成後はスプレッドシートのIDをメモしてください。IDは `https://docs.google.com/spreadsheets/d/[スプレッドシートID]/`の位置となります。
+
+### cofig.pyの作成
+
+`config.py`を作成します。`config_sample.py`ファイルをコピーしてリネームしてください。
+
+2つの設定を変更します。
+
+- SERVICE_ACCOUNT_FILE: Googleサービスアカウントの鍵ファイルのパス
+- SAMPLE_SPREADSHEET_ID: homeenvdash_sensor_nodeから記録したGoogleSheetのIDを記載します。
+
+```python
+# config.py
+from pathlib import Path
+
+# config home_sensor_node
+
+SERVICE_ACCOUNT_FILE = Path(__file__).parent / "oauth_service_account_key.json"
+SAMPLE_SPREADSHEET_ID = "[作成したスプレッドシートID]"
+
+```
 
 ### Raspberry Piセットアップとセンサー接続
 
